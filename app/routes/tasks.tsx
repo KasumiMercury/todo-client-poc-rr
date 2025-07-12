@@ -1,15 +1,16 @@
 import type { Route } from "./+types/tasks";
 import type { components } from "~/api/task";
 import { Tasks } from "~/tasks/tasks";
+import { getAuthHeaders } from "~/utils/auth";
 
 type Task = components["schemas"]["task"];
 
 export async function clientLoader(): Promise<{ tasks: Task[] }> {
   try {
+    const headers = await getAuthHeaders();
+    
     const response = await fetch("http://localhost:8080/tasks", {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     });
 
     if (!response.ok) {
@@ -17,6 +18,7 @@ export async function clientLoader(): Promise<{ tasks: Task[] }> {
     }
 
     const tasks: Task[] = await response.json();
+
     return { tasks };
   } catch (error) {
     console.error("Error fetching tasks:", error);

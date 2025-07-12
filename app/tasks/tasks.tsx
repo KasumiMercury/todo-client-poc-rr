@@ -32,10 +32,10 @@ export function Tasks({ tasks }: TasksProps) {
             >
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-gray-900">
-                  {task.name}
+                  {task.name || 'Unnamed Task'}
                 </h2>
                 <span className="text-sm text-gray-500 font-mono">
-                  ID: {task.id}
+                  ID: {task.id || 'N/A'}
                 </span>
               </div>
             </div>
