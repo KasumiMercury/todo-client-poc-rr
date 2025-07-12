@@ -9,7 +9,7 @@ interface TasksProps {
 }
 
 export function Tasks({tasks: initialTasks}: TasksProps) {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>(initialTasks || []);
   const [taskName, setTaskName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
