@@ -74,17 +74,17 @@ export interface components {
         error: {
             /**
              * @description Error code
-             * @example 404
+             * @example 400
              */
             code: number;
             /**
              * @description Error message
-             * @example Task not found
+             * @example Bad Request
              */
             message: string;
             /**
              * @description Additional error details
-             * @example The task with ID 12345 was not found
+             * @example Invalid input parameters
              */
             details?: string;
         };
