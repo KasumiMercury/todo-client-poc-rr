@@ -19,7 +19,7 @@ export function Tasks({tasks: initialTasks}: TasksProps) {
 
     setIsSubmitting(true);
     try {
-      const newTask = await createTask({name: taskName.trim()});
+      const newTask = await createTask({title: taskName.trim()});
       setTasks(prevTasks => [newTask, ...prevTasks]);
       setTaskName("");
     } catch (error) {
@@ -67,7 +67,7 @@ export function Tasks({tasks: initialTasks}: TasksProps) {
                       >
                         <div className="flex items-center justify-between">
                           <h2 className="text-xl font-semibold text-gray-900">
-                            {task.name || 'Unnamed Task'}
+                            {task.title || 'Unnamed Task'}
                           </h2>
                           <span className="text-sm text-gray-500 font-mono">
                       ID: {task.id || 'N/A'}
