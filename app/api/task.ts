@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get application health status */
+        get: operations["health.getHealth"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tasks": {
         parameters: {
             query?: never;
@@ -52,24 +69,58 @@ export interface components {
              */
             id: string;
             /**
-             * @description The name of the task
+             * @description The title of the task
              * @example Sample Task
              */
-            name: string;
+            title: string;
         };
         taskCreate: {
             /**
-             * @description The name of the task
+             * @description The title of the task
              * @example Sample Task
              */
-            name: string;
+            title: string;
         };
         taskUpdate: {
             /**
-             * @description The name of the task
+             * @description The title of the task
              * @example Updated Task
              */
-            name?: string;
+            title?: string;
+        };
+        healthStatus: {
+            /**
+             * @description Overall application health status
+             * @example UP
+             * @enum {string}
+             */
+            status: "UP" | "DOWN";
+            /**
+             * Format: date-time
+             * @description Timestamp of the health check
+             * @example 2024-01-15T10:30:00Z
+             */
+            timestamp: string;
+            /** @description Health status of individual components */
+            components: {
+                database?: components["schemas"]["healthComponent"];
+            };
+        };
+        healthComponent: {
+            /**
+             * @description Component health status
+             * @example UP
+             * @enum {string}
+             */
+            status: "UP" | "DOWN";
+            /**
+             * @description Additional component details
+             * @example {
+             *       "connection": "PostgreSQL",
+             *       "responseTime": "5ms"
+             *     }
+             */
+            details?: Record<string, never>;
         };
         error: {
             /**
@@ -97,6 +148,74 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    "health.getHealth": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Application is healthy */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "status": "UP",
+                     *       "timestamp": "2024-01-15T10:30:00Z",
+                     *       "components": {
+                     *         "database": {
+                     *           "status": "UP",
+                     *           "details": {
+                     *             "connection": "PostgreSQL",
+                     *             "responseTime": "5ms"
+                     *           }
+                     *         }
+                     *       }
+                     *     } */
+                    "application/json": components["schemas"]["healthStatus"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal Server Error",
+                     *       "details": "Health check service unavailable"
+                     *     } */
+                    "application/json": components["schemas"]["error"];
+                };
+            };
+            /** @description Application is unhealthy */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "status": "DOWN",
+                     *       "timestamp": "2024-01-15T10:30:00Z",
+                     *       "components": {
+                     *         "database": {
+                     *           "status": "DOWN",
+                     *           "details": {
+                     *             "error": "Connection refused"
+                     *           }
+                     *         }
+                     *       }
+                     *     } */
+                    "application/json": components["schemas"]["healthStatus"];
+                };
+            };
+        };
+    };
     "task.getAllTasks": {
         parameters: {
             query?: never;
