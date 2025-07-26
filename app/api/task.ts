@@ -240,6 +240,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 401,
+                     *       "message": "Unauthorized",
+                     *       "details": "User ID not found in token"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -249,6 +254,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal server error",
+                     *       "details": "database connection failed"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -282,6 +292,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 400,
+                     *       "message": "Bad request",
+                     *       "details": "title field is required and cannot be empty"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -291,6 +306,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 401,
+                     *       "message": "Unauthorized",
+                     *       "details": "User ID not found in token"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -300,6 +320,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal server error",
+                     *       "details": "database connection failed"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -332,6 +357,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 401,
+                     *       "message": "Unauthorized",
+                     *       "details": "User ID not found in token"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -341,6 +371,10 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 404,
+                     *       "message": "Task not found"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -350,6 +384,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal server error",
+                     *       "details": "database connection failed"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -386,6 +425,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 400,
+                     *       "message": "Bad request",
+                     *       "details": "task title cannot exceed 255 characters"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -395,6 +439,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 401,
+                     *       "message": "Unauthorized",
+                     *       "details": "User ID not found in token"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -404,6 +453,10 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 404,
+                     *       "message": "Task not found"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -413,6 +466,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal server error",
+                     *       "details": "database connection failed"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -443,6 +501,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 401,
+                     *       "message": "Unauthorized",
+                     *       "details": "User ID not found in token"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -452,6 +515,10 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 404,
+                     *       "message": "Task not found"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
@@ -461,6 +528,11 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /** @example {
+                     *       "code": 500,
+                     *       "message": "Internal server error",
+                     *       "details": "database connection failed"
+                     *     } */
                     "application/json": components["schemas"]["error"];
                 };
             };
