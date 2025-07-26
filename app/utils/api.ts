@@ -7,14 +7,6 @@ type TaskUpdate = components["schemas"]["taskUpdate"];
 type HealthStatus = components["schemas"]["healthStatus"];
 type ApiError = components["schemas"]["error"];
 
-type GetAllTasksResponse = operations["task.getAllTasks"]["responses"]["200"]["content"]["application/json"];
-type CreateTaskRequest = operations["task.createTask"]["requestBody"]["content"]["application/json"];
-type CreateTaskResponse = operations["task.createTask"]["responses"]["201"]["content"]["application/json"];
-type GetTaskResponse = operations["task.getTask"]["responses"]["200"]["content"]["application/json"];
-type UpdateTaskRequest = operations["task.updateTask"]["requestBody"]["content"]["application/json"];
-type UpdateTaskResponse = operations["task.updateTask"]["responses"]["200"]["content"]["application/json"];
-type GetHealthResponse = operations["health.getHealth"]["responses"]["200"]["content"]["application/json"];
-
 const API_BASE_URL = "http://localhost:8080";
 
 async function apiRequest<T extends keyof paths>(
@@ -42,7 +34,7 @@ async function handleErrorResponse(response: Response, operation: string): Promi
   }
 }
 
-export async function getAllTasks(): Promise<GetAllTasksResponse> {
+export async function getAllTasks(): Promise<Task[]> {
   const response = await apiRequest("/tasks");
 
   if (!response.ok) {
@@ -54,7 +46,7 @@ export async function getAllTasks(): Promise<GetAllTasksResponse> {
   return response.json();
 }
 
-export async function createTask(taskData: CreateTaskRequest): Promise<CreateTaskResponse> {
+export async function createTask(taskData: TaskCreate): Promise<Task> {
   const response = await apiRequest("/tasks", {
     method: "POST",
     body: JSON.stringify(taskData),
@@ -69,7 +61,7 @@ export async function createTask(taskData: CreateTaskRequest): Promise<CreateTas
   return response.json();
 }
 
-export async function getTask(taskId: string): Promise<GetTaskResponse> {
+export async function getTask(taskId: string): Promise<Task> {
   const response = await apiRequest(`/tasks/${taskId}` as keyof paths);
 
   if (!response.ok) {
@@ -81,7 +73,7 @@ export async function getTask(taskId: string): Promise<GetTaskResponse> {
   return response.json();
 }
 
-export async function updateTask(taskId: string, taskData: UpdateTaskRequest): Promise<UpdateTaskResponse> {
+export async function updateTask(taskId: string, taskData: TaskUpdate): Promise<Task> {
   const response = await apiRequest(`/tasks/${taskId}` as keyof paths, {
     method: "PUT",
     body: JSON.stringify(taskData),
@@ -108,7 +100,7 @@ export async function deleteTask(taskId: string): Promise<void> {
   }
 }
 
-export async function getHealth(): Promise<GetHealthResponse> {
+export async function getHealth(): Promise<HealthStatus> {
   const response = await apiRequest("/health");
 
   if (!response.ok) {
