@@ -1,14 +1,17 @@
 import {useState} from "react";
-import type {components} from "../api/task";
+import type {components, operations} from "../api/task";
 import {createTask} from "~/utils/api";
 
 type Task = components["schemas"]["task"];
+type CreateTaskRequest = operations["task.createTask"]["requestBody"]["content"]["application/json"];
+type GetAllTasksResponse = operations["task.getAllTasks"]["responses"]["200"]["content"]["application/json"];
 
 interface TasksProps {
-  tasks: Task[];
+  tasks: GetAllTasksResponse;
+  error?: string;
 }
 
-export function Tasks({tasks: initialTasks}: TasksProps) {
+export function Tasks({tasks: initialTasks, error}: TasksProps) {
   const [tasks, setTasks] = useState<Task[]>(initialTasks || []);
   const [taskName, setTaskName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,7 +22,8 @@ export function Tasks({tasks: initialTasks}: TasksProps) {
 
     setIsSubmitting(true);
     try {
-      const newTask = await createTask({title: taskName.trim()});
+      const taskData: CreateTaskRequest = { title: taskName.trim() };
+      const newTask = await createTask(taskData);
       setTasks(prevTasks => [newTask, ...prevTasks]);
       setTaskName("");
     } catch (error) {
@@ -32,6 +36,17 @@ export function Tasks({tasks: initialTasks}: TasksProps) {
       <div className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-6 py-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Task List</h1>
+          
+          {error && (
+            <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+              <div className="flex">
+                <div className="text-red-700">
+                  <h3 className="font-medium">Error loading tasks</h3>
+                  <p className="mt-1 text-sm">{error}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 p-6 rounded-lg">
             <div className="flex gap-4">
