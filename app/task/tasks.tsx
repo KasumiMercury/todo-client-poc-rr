@@ -1,6 +1,6 @@
 import {useState} from "react";
 import type {components, operations} from "../api/task";
-import {createTask} from "~/utils/api";
+import {createTask} from "~/task/api";
 
 type Task = components["schemas"]["task"];
 type CreateTaskRequest = operations["task.createTask"]["requestBody"]["content"]["application/json"];

@@ -28,7 +28,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all tasks */
+        /** Get all task */
         get: operations["task.getAllTasks"];
         put?: never;
         /** Create a new task */
@@ -225,7 +225,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description List of tasks */
+            /** @description List of task */
             200: {
                 headers: {
                     [name: string]: unknown;

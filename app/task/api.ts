@@ -1,5 +1,5 @@
 import type {components, operations, paths} from "~/api/task";
-import {getAuthHeaders} from "./auth";
+import {getAuthHeaders} from "~/utils/auth";
 
 type Task = components["schemas"]["task"];
 type TaskCreate = components["schemas"]["taskCreate"];
